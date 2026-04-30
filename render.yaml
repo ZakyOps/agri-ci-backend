@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: agri-ci-backend
+    runtime: docker
+    plan: free
+    repo: https://github.com/ZakyOps/agri-ci-backend
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: APP_NAME
+        value: Agri CI
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: APP_LOCALE
+        value: fr
+      - key: APP_FALLBACK_LOCALE
+        value: fr
+      - key: APP_FAKER_LOCALE
+        value: fr_FR
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://zakyops.github.io

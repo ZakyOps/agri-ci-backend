@@ -24,6 +24,6 @@ RUN chmod +x /usr/local/bin/agri-ci-entrypoint \
     && touch database/database.sqlite \
     && chown -R www-data:www-data storage bootstrap/cache database
 
-EXPOSE 8000
+EXPOSE 10000
 
 ENTRYPOINT ["agri-ci-entrypoint"]

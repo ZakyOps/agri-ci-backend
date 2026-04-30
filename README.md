@@ -32,14 +32,21 @@ http://127.0.0.1:8000/docs/api
 php artisan test
 ```
 
-## Deploiement
+## Deploiement Render
 
-Le backend peut etre deploye sur un hebergeur compatible Docker ou PHP. Pour une demo rapide, le projet inclut un `Dockerfile` et un script d'entree qui lancent automatiquement :
+Le backend peut etre deploye sur Render avec Docker. Le depot inclut :
 
-- installation des dependances Composer ;
-- creation de la base SQLite si necessaire ;
-- migrations et donnees de demonstration ;
-- serveur Laravel sur le port fourni par l'hebergeur.
+- `Dockerfile`
+- `docker/entrypoint.sh`
+- `render.yaml`
+
+Dans Render :
+
+1. Creer un nouveau `Web Service`.
+2. Choisir le depot `ZakyOps/agri-ci-backend`.
+3. Choisir le runtime `Docker`.
+4. Laisser Render utiliser le `Dockerfile`.
+5. Ajouter les variables demandees par `render.yaml`.
 
 Variables utiles :
 
@@ -50,7 +57,7 @@ APP_DEBUG=false
 APP_URL=https://URL_BACKEND_DEPLOYE
 APP_KEY=base64:...
 DB_CONNECTION=sqlite
-CORS_ALLOWED_ORIGINS=https://NOM_UTILISATEUR.github.io
+CORS_ALLOWED_ORIGINS=https://zakyops.github.io
 ```
 
 Generer une cle d'application avant le deploiement :

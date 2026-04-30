@@ -7,7 +7,10 @@ fi
 
 touch database/database.sqlite
 
-php artisan key:generate --force --no-interaction
+if [ -z "$APP_KEY" ]; then
+    php artisan key:generate --force --no-interaction
+fi
+
 php artisan migrate:fresh --seed --force --no-interaction
 
-exec php artisan serve --host=0.0.0.0 --port=8000
+exec php artisan serve --host=0.0.0.0 --port="${PORT:-8000}"
