@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Debt;
 use App\Models\Farmer;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -41,5 +42,26 @@ class RepaymentFifoTest extends TestCase
             'remaining_amount_fcfa' => 19000,
             'status' => Debt::STATUS_PARTIAL,
         ]);
+    }
+
+    public function test_repayment_uses_configured_commodity_rate_at_repayment_time(): void
+    {
+        $this->seed();
+
+        Setting::query()
+            ->where('key', 'commodity_rate_fcfa_per_kg')
+            ->update(['value' => '1500']);
+
+        $operator = User::query()->where('role', User::ROLE_OPERATOR)->firstOrFail();
+        $farmer = Farmer::query()->where('identifier', 'FCI-0002')->firstOrFail();
+
+        $response = $this->actingAs($operator)->postJson('/api/repayments', [
+            'farmer_id' => $farmer->id,
+            'commodity_kg' => 10,
+        ]);
+
+        $response->assertCreated()
+            ->assertJsonPath('data.rate_fcfa_per_kg', 1500)
+            ->assertJsonPath('data.value_fcfa', 15000);
     }
 }

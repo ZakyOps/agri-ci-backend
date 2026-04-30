@@ -54,15 +54,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Setting::query()->insert([
-            ['key' => 'credit_interest_rate', 'value' => '0.30', 'description' => 'Interest applied to credit transactions.'],
-            ['key' => 'commodity_rate_fcfa_per_kg', 'value' => '1000', 'description' => 'FCFA conversion rate per kg of commodity.'],
+            ['key' => 'credit_interest_rate', 'value' => '0.30', 'description' => 'Interet applique aux transactions a credit.'],
+            ['key' => 'commodity_rate_fcfa_per_kg', 'value' => '1000', 'description' => 'Taux de conversion FCFA par kg de marchandise.'],
         ]);
 
         $categories = [];
         foreach ([
             'Pesticides' => ['Herbicides', 'Insecticides', 'Fungicides'],
-            'Fertilizers' => ['NPK', 'Urea', 'Organic Fertilizers'],
-            'Seeds' => ['Maize', 'Rice', 'Vegetable Seeds'],
+            'Engrais' => ['NPK', 'Uree', 'Engrais organiques'],
+            'Semences' => ['Mais', 'Riz', 'Semences maraicheres'],
         ] as $parentName => $children) {
             $parent = Category::query()->create([
                 'name' => $parentName,
@@ -79,16 +79,16 @@ class DatabaseSeeder extends Seeder
         }
 
         foreach ([
-            ['Herbicide Glypho 1L', 'Herbicides', 4500, 'Broad-spectrum herbicide for pre-planting weed control.'],
-            ['Herbicide Selectif 500ml', 'Herbicides', 3500, 'Selective herbicide for vegetable plots.'],
-            ['Insecticide CacaoProtect 1L', 'Insecticides', 6000, 'Insecticide for cocoa plantation protection.'],
-            ['Fungicide Plantation Plus', 'Fungicides', 5500, 'Fungicide for humid plantation conditions.'],
-            ['NPK 15-15-15 50kg', 'NPK', 22000, 'Balanced fertilizer for field crops.'],
-            ['Urea 46% 50kg', 'Urea', 24000, 'Nitrogen fertilizer for crop growth support.'],
-            ['Compost Bio 25kg', 'Organic Fertilizers', 8000, 'Organic compost for soil improvement.'],
-            ['Semences Mais Jaune 5kg', 'Maize', 12000, 'Improved yellow maize seeds.'],
-            ['Semences Riz Nerica 10kg', 'Rice', 15000, 'NERICA rice seeds for local production.'],
-            ['Semences Tomate 100g', 'Vegetable Seeds', 3000, 'Tomato seed sachet for market gardening.'],
+            ['Herbicide Glypho 1L', 'Herbicides', 4500, 'Herbicide a large spectre pour le controle des mauvaises herbes avant semis.'],
+            ['Herbicide Selectif 500ml', 'Herbicides', 3500, 'Herbicide selectif pour les parcelles maraicheres.'],
+            ['Insecticide CacaoProtect 1L', 'Insecticides', 6000, 'Insecticide pour la protection des plantations de cacao.'],
+            ['Fungicide Plantation Plus', 'Fungicides', 5500, 'Fungicide adapte aux conditions humides des plantations.'],
+            ['NPK 15-15-15 50kg', 'NPK', 22000, 'Engrais equilibre pour les cultures de plein champ.'],
+            ['Uree 46% 50kg', 'Uree', 24000, 'Engrais azote pour soutenir la croissance des cultures.'],
+            ['Compost Bio 25kg', 'Engrais organiques', 8000, 'Compost organique pour ameliorer la fertilite du sol.'],
+            ['Semences Mais Jaune 5kg', 'Mais', 12000, 'Semences ameliorees de mais jaune.'],
+            ['Semences Riz Nerica 10kg', 'Riz', 15000, 'Semences de riz NERICA pour la production locale.'],
+            ['Semences Tomate 100g', 'Semences maraicheres', 3000, 'Sachet de semences de tomate pour le maraichage.'],
         ] as [$name, $category, $price, $description]) {
             Product::query()->create([
                 'category_id' => $categories[$category]->id,

@@ -64,4 +64,31 @@ class CreditCheckoutTest extends TestCase
         $response->assertUnprocessable()
             ->assertJsonValidationErrors('credit_limit');
     }
+
+    public function test_cash_checkout_closes_transaction_without_creating_debt(): void
+    {
+        $this->seed();
+
+        $operator = User::query()->where('role', User::ROLE_OPERATOR)->firstOrFail();
+        $farmer = Farmer::query()->where('identifier', 'FCI-0001')->firstOrFail();
+        $product = Product::query()->where('price_fcfa', 12000)->firstOrFail();
+
+        $response = $this->actingAs($operator)->postJson('/api/transactions', [
+            'farmer_id' => $farmer->id,
+            'payment_method' => 'cash',
+            'items' => [
+                ['product_id' => $product->id, 'quantity' => 1],
+            ],
+        ]);
+
+        $response->assertCreated()
+            ->assertJsonPath('data.status', 'closed')
+            ->assertJsonPath('data.interest_amount_fcfa', 0)
+            ->assertJsonPath('data.credited_total_fcfa', 12000);
+
+        $this->assertDatabaseMissing('debts', [
+            'farmer_id' => $farmer->id,
+            'original_amount_fcfa' => 12000,
+        ]);
+    }
 }

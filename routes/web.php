@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 
 Route::get('/docs/openapi.yaml', function () {
-    return response()->file(base_path('../api/openapi.yaml'), [
+    return response()->file(base_path('api/openapi.yaml'), [
         'Content-Type' => 'application/yaml',
     ]);
 });
