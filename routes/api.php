@@ -14,7 +14,7 @@ Route::get('/', function () {
     return response()->json([
         'success' => true,
         'message' => 'API Agri CI opérationnelle.',
-        'base_url' => url('/api'),
+        'base_url' => rtrim((string) config('app.url'), '/').'/api',
         'comptes_demo' => [
             'admin' => 'admin@agrici.ci / password',
             'superviseur' => 'supervisor.abidjan@agrici.ci / password',

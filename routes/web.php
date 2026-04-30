@@ -12,7 +12,11 @@ Route::get('/', function () {
 });
 
 Route::get('/docs/openapi.yaml', function () {
-    return response()->file(base_path('api/openapi.yaml'), [
+    $path = base_path('api/openapi.yaml');
+
+    abort_unless(file_exists($path), 404, 'Specification OpenAPI introuvable.');
+
+    return response()->file($path, [
         'Content-Type' => 'application/yaml',
     ]);
 });
