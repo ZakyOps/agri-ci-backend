@@ -64,10 +64,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/{product}', [ProductController::class, 'show']);
 
-    Route::apiResource('farmers', FarmerController::class)->except(['destroy']);
     Route::get('/farmers/search', [FarmerController::class, 'search']);
     Route::get('/farmers/{farmer}/debts', [FarmerController::class, 'debts']);
     Route::get('/farmers/{farmer}/repayments', [RepaymentController::class, 'farmerRepayments']);
+    Route::apiResource('farmers', FarmerController::class)->except(['destroy']);
 
     Route::middleware('role:operator')->group(function () {
         Route::post('/transactions', [TransactionController::class, 'store']);
