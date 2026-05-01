@@ -2,6 +2,38 @@
 
 Ce dossier contient l'API Laravel du projet Agri CI.
 
+## Liens de livraison
+
+| Element | Lien |
+| --- | --- |
+| Depot backend | https://github.com/ZakyOps/agri-ci-backend |
+| API backend en ligne | https://agri-ci-backend.onrender.com |
+| Documentation Swagger/OpenAPI | https://agri-ci-backend.onrender.com/docs/api |
+| Fichier OpenAPI | https://agri-ci-backend.onrender.com/docs/openapi.yaml |
+| Depot frontend Flutter | https://github.com/ZakyOps/agri-ci-mobile |
+| Application Flutter Web | https://zakyops.github.io/agri-ci-mobile/ |
+| API consommee par le frontend | https://agri-ci-backend.onrender.com/api |
+
+Le formulaire de soumission ne permet pas toujours d'ajouter tous les liens. Les liens complementaires sont donc centralises ici.
+
+## Fonctionnalites et bonus
+
+- API REST Laravel avec authentification Sanctum.
+- Roles `admin`, `supervisor` et `operator`.
+- Gestion des categories imbriquees et du catalogue produits.
+- Gestion des agriculteurs avec limite de credit.
+- Commandes en especes ou a credit.
+- Interet configurable sur le credit.
+- Blocage automatique si la limite de credit est depassee.
+- Dettes suivies en FCFA.
+- Remboursement en marchandise converti en FCFA.
+- Allocation FIFO des remboursements avec remboursement partiel.
+- Documentation Swagger/OpenAPI incluse dans le depot.
+- Docker et configuration Render.
+- Tests automatises Laravel.
+- Donnees de demonstration pretes a tester.
+- Rapport d'utilisation de l'IA disponible dans le depot principal.
+
 ## Lancement local
 
 ```bash
