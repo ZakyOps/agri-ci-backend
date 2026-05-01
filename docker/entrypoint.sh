@@ -18,6 +18,11 @@ else
 fi
 
 php artisan config:clear --no-interaction
-php artisan migrate:fresh --seed --force --no-interaction
+
+if php artisan migrate:status --no-interaction >/dev/null 2>&1; then
+    php artisan migrate --force --no-interaction
+else
+    php artisan migrate:fresh --seed --force --no-interaction
+fi
 
 exec php artisan serve --host=0.0.0.0 --port="${PORT:-8000}"
